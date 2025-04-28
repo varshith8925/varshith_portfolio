@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS Student Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #4f46e5, #7c3aed, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 3s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* New background patterns */
+        .bg-grid-pattern {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .bg-dots-pattern {
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .bg-circuit-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40zm0-40h2l-2 2V0zm0 4l4-4h2l-6 6V4zm0 4l8-8h2L40 10V8zm0 4L52 0h2L40 14v-2zm0 4L56 0h2L40 18v-2zm0 4L60 0h2L40 22v-2zm0 4L64 0h2L40 26v-2zm0 4L68 0h2L40 30v-2zm0 4L72 0h2L40 34v-2zm0 4L76 0h2L40 38v-2zm0 4L80 0v2L42 40h-2zm4 0L80 4v2L46 40h-2zm4 0L80 8v2L50 40h-2zm4 0l28-28v2L54 40h-2zm4 0l24-24v2L58 40h-2zm4 0l20-20v2L62 40h-2zm4 0l16-16v2L66 40h-2zm4 0l12-12v2L70 40h-2zm4 0l8-8v2l-6 6h-2zm4 0l4-4v2l-2 2h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Enhanced hover effects */
+        .hover-glow {
+            transition: all 0.3s ease;
+        }
+        .hover-glow:hover {
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+            transform: translateY(-5px);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #4f46e5, #7c3aed);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #4338ca, #6d28d9);
+        }
+
+        /* Particle animation */
+        @keyframes particle-float {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            animation: particle-float 15s infinite;
+        }
+    </style>
+    <script src="script.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-blue-50">
+    <nav class="fixed w-full bg-white bg-opacity-95 shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold text-gray-800">Portfolio</span>
+                </div>
+                <div class="hidden md:flex items-center">
+                    <a href="#home" class="nav-link px-3 py-2 rounded-md text-gray-700 hover:text-blue-600">Home</a>
+                    <a href="#about" class="nav-link px-3 py-2 rounded-md text-gray-700 hover:text-blue-600">About</a>
+                    <a href="#skills" class="nav-link px-3 py-2 rounded-md text-gray-700 hover:text-blue-600">Skills</a>
+                    <a href="#projects" class="nav-link px-3 py-2 rounded-md text-gray-700 hover:text-blue-600">Projects</a>
+                    <a href="#contact" class="nav-link px-3 py-2 rounded-md text-gray-700 hover:text-blue-600">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 rounded-md text-gray-700 hover:text-blue-600">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-gray-700 hover:text-blue-600">About</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-gray-700 hover:text-blue-600">Skills</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-gray-700 hover:text-blue-600">Projects</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-gray-700 hover:text-blue-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&q=80')] bg-cover bg-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/90 to-purple-900/90"></div>
+        <div class="text-center text-white px-4 z-10">
+            <div class="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden border-4 border-purple-400 shadow-lg transform hover:scale-105 transition-transform duration-300 hover:border-blue-400">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80" 
+                     alt="Profile" class="w-full h-full object-cover">
+            </div>
+            <h1 class="text-6xl font-bold mb-4 animate-typing gradient-text">K. Varshith Reddy</h1>
+            <p class="text-2xl mb-2 animate-fade-in text-purple-200">Computer Science Student | Java Developer</p>
+            <p class="text-xl mb-8 animate-fade-in text-blue-200">MLRIT, Hyderabad | 2nd Year</p>
+            <a href="#contact" class="inline-block px-8 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full font-semibold hover:transform hover:scale-105 transition-all duration-300 hover:from-purple-600 hover:to-blue-600 shadow-lg">Get in Touch</a>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-gradient-to-br from-white to-blue-50 relative">
+        <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div class="max-w-6xl mx-auto px-4 relative">
+            <h2 class="text-4xl font-bold text-center mb-12 relative gradient-text">
+                About Me
+                <div class="absolute w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 bottom-0 left-1/2 transform -translate-x-1/2"></div>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative rounded-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?auto=format&fit=crop&q=80" 
+                             alt="Programming" class="w-full h-[400px] object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <p class="text-lg text-gray-600 leading-relaxed">Hi, I'm K. Varshith Reddy, a second-year Computer Science student at MLR Institute of Technology, Hyderabad. I'm passionate about software development, with a particular interest in Java programming.</p>
+                    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500 shadow-md transform hover:-translate-y-1 transition-transform duration-300">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-2">Education</h3>
+                        <p class="text-gray-600">Currently pursuing B.Tech in Computer Science at MLRIT, Hyderabad. Focusing on building strong programming fundamentals and exploring various aspects of software development.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-20 bg-gradient-to-br from-gray-900 to-blue-900 relative overflow-hidden">
+        <div class="absolute inset-0 bg-circuit-pattern opacity-5"></div>
+        <div class="max-w-6xl mx-auto px-4 relative">
+            <h2 class="text-4xl font-bold text-center text-white mb-12">Technical Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="skill-card backdrop-blur-md bg-white/10 p-6 rounded-lg border border-white/20 hover:-translate-y-2 transition-all duration-300">
+                    <i class="fab fa-java text-5xl text-blue-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Java</h3>
+                    <p class="text-blue-200">Core Java, OOP, Data Structures</p>
+                </div>
+                <div class="skill-card backdrop-blur-md bg-white/10 p-6 rounded-lg border border-white/20 hover:-translate-y-2 transition-all duration-300">
+                    <i class="fas fa-database text-5xl text-blue-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Databases</h3>
+                    <p class="text-blue-200">SQL, Database Design</p>
+                </div>
+                <div class="skill-card backdrop-blur-md bg-white/10 p-6 rounded-lg border border-white/20 hover:-translate-y-2 transition-all duration-300">
+                    <i class="fas fa-code text-5xl text-blue-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Web Development</h3>
+                    <p class="text-blue-200">HTML, CSS, JavaScript</p>
+                </div>
+                <div class="skill-card backdrop-blur-md bg-white/10 p-6 rounded-lg border border-white/20 hover:-translate-y-2 transition-all duration-300">
+                    <i class="fas fa-cogs text-5xl text-blue-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Tools</h3>
+                    <p class="text-blue-200">Git, Eclipse, IntelliJ IDEA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 bg-gradient-to-br from-white to-purple-50 relative">
+        <div class="absolute inset-0 bg-dots-pattern opacity-5"></div>
+        <div class="max-w-6xl mx-auto px-4 relative">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="project-card group">
+                    <div class="relative overflow-hidden rounded-t-xl">
+                        <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&q=80" 
+                             alt="Java Project" class="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-purple-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 bg-white rounded-b-xl shadow-lg border border-purple-100">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-purple-600 transition-colors">Java Calculator</h3>
+                        <p class="text-gray-600 mb-4">A scientific calculator built with Java Swing</p>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">Java</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">GUI</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card group">
+                    <div class="relative overflow-hidden rounded-t-xl">
+                        <img src="https://images.unsplash.com/photo-1623479322729-28b25c16b011?auto=format&fit=crop&q=80" 
+                             alt="Student Management System" class="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 bg-white rounded-b-xl shadow-lg border border-blue-100">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-blue-600 transition-colors">Student Management System</h3>
+                        <p class="text-gray-600 mb-4">Database-driven application for managing student records</p>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">Java</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">SQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="coding-profiles" class="py-20 bg-gradient-to-br from-gray-900 to-purple-900 relative overflow-hidden">
+        <div class="absolute inset-0 bg-circuit-pattern opacity-5"></div>
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-white mb-12 relative">
+                Coding Profiles
+                <div class="absolute w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 bottom-0 left-1/2 transform -translate-x-1/2"></div>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                    <div class="bg-gradient-to-r from-gray-900 to-gray-800 p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <img src="https://leetcode.com/static/images/LeetCode_logo_rvs.png" alt="LeetCode" class="w-12 h-12">
+                                <h3 class="text-2xl font-bold text-white">LeetCode</h3>
+                            </div>
+                            <a href="#" id="leetcode-profile" target="_blank" class="text-blue-400 hover:text-blue-300">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div class="text-center">
+                                <p class="text-sm text-gray-600">Easy</p>
+                                <p id="leetcode-easy" class="text-xl font-bold text-green-500">-</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-sm text-gray-600">Medium</p>
+                                <p id="leetcode-medium" class="text-xl font-bold text-yellow-500">-</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-sm text-gray-600">Hard</p>
+                                <p id="leetcode-hard" class="text-xl font-bold text-red-500">-</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Total Solved:</span>
+                                <span id="leetcode-total" class="font-semibold">-</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Ranking:</span>
+                                <span id="leetcode-ranking" class="font-semibold">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                    <div class="bg-gradient-to-r from-green-800 to-green-700 p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200716222246/Path-219.png" alt="GeeksforGeeks" class="w-12 h-12">
+                                <h3 class="text-2xl font-bold text-white">GeeksforGeeks</h3>
+                            </div>
+                            <a href="#" id="gfg-profile" target="_blank" class="text-green-300 hover:text-green-200">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div class="text-center">
+                                <p class="text-sm text-gray-600">School</p>
+                                <p id="gfg-school" class="text-xl font-bold text-green-500">-</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-sm text-gray-600">Basic</p>
+                                <p id="gfg-basic" class="text-xl font-bold text-yellow-500">-</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-sm text-gray-600">Hard</p>
+                                <p id="gfg-hard" class="text-xl font-bold text-red-500">-</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Total Problems:</span>
+                                <span id="gfg-total" class="font-semibold">-</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Coding Score:</span>
+                                <span id="gfg-score" class="font-semibold">-</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Institution Rank:</span>
+                                <span id="gfg-rank" class="font-semibold">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-gradient-to-br from-white to-blue-50 relative">
+        <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div class="max-w-4xl mx-auto px-4 relative">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Contact Me</h2>
+            <div class="space-y-6">
+                <div class="flex items-center justify-center gap-4 group">
+                    <div class="p-4 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white transform group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-envelope text-2xl"></i>
+                    </div>
+                    <p class="text-gray-600 group-hover:text-gray-900 transition-colors">varshith730@gmail.com</p>
+                </div>
+                <div class="flex items-center justify-center gap-4 group">
+                    <div class="p-4 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white transform group-hover:scale-110 transition-transform duration-300">
+                        <i class="fab fa-github text-2xl"></i>
+                    </div>
+                    <p class="text-gray-600 group-hover:text-gray-900 transition-colors">Varshith8925</p>
+                </div>
+                <div class="flex items-center justify-center gap-4 group">
+                    <div class="p-4 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white transform group-hover:scale-110 transition-transform duration-300">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </div>
+                    <p class="text-gray-600 group-hover:text-gray-900 transition-colors">linkedin.com/in/yourusername</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gradient-to-r from-gray-900 to-blue-900 text-white py-6">
+        <p class="text-center">&copy; 2025 CS Student Portfolio. All rights reserved.</p>
+    </footer>
+</body>
+</html>
